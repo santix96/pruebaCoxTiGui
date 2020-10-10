@@ -1,0 +1,25 @@
+<div class="container">
+  <mat-card class="login-card">
+    <mat-card-header class="cardLoginHeader">
+      <mat-card-title>Bienvenido</mat-card-title>
+      <mat-card-subtitle>Indicanos tu informacion de ingreso</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="assets/logoCoxTi.jpg" alt="Logo coxTi" class="login-image">
+    <mat-card-content>
+      <form [formGroup]="formLogIn">
+        <mat-form-field class="full-width-input">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="userEmail" placeholder="Ex. pat@example.com">
+        </mat-form-field>
+        <mat-form-field class="full-width-input">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="userPassword">
+        </mat-form-field>
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" class="submitFormLogin">Ingresar</button>
+      <a [routerLink]="'/registerUser'" class="registerText"> Registrate</a>
+    </mat-card-actions>
+  </mat-card>
+</div>
