@@ -23,5 +23,8 @@ export class ResidencialService {
     return this.Http.post(this.configService.serverIp.concat('/save_residential'), residentialData, {headers});
   
   }
+  getAllResidences(){
+    return this.Http.get(this.configService.serverIp.concat('/all_residences'));
+  }
 
 }
