@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl, FormGroupDirective, NgForm} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-
+import { AuthServiceService } from '../../services/authService/auth-service.service';
+import {sha256} from 'js-sha256';
 
 @Component({
   selector: 'app-login',
@@ -11,40 +11,66 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
   formLogIn: FormGroup;
-
-  emailPattern = "^[a-z0-9._%+-]+@[a-z]+\.[a-z]{2,4}\.[a-z]{2,4}$";
+  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private authService: AuthServiceService,
+    private router: Router
   ) { }
 
   ngOnInit() {
     this.formLogIn = this.formBuilder.group({
-      userEmail: ['', [Validators.required, Validators.minLength(5)]],
-      userPassword: ['', [Validators.required]],
+      userEmail: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern(this.emailPattern)]],
+      userPassword: ['', [Validators.required, Validators.minLength(3)]],
     });
+    this.verifySession();
   }
-  
-  public getError(controlName: string): string {
-    let errorMessage = null;
-    const control = this.formLogIn.get(controlName);
-    if (control.touched && control.errors != null) {
-      const error = JSON.stringify(control.errors);
-      const { required } = control.errors;
-      const { minlength } = control.errors;
-      const { userEmail } = control.errors;
-      if (required) {
-        errorMessage = 'Campo requerido';
+
+  login() {
+    const passwordSha256 = sha256(this.formLogIn.controls['userPassword'].value);
+    this.formLogIn.controls['userPassword'].setValue(passwordSha256);
+
+    this.authService.login(this.formLogIn.value).subscribe(
+      (response) => {
+        localStorage.setItem('currentUser', response['email']);
+        this.router.navigate(['/user'])
+      },
+      (error) => {
+        console.error(error);
       }
-      if (minlength) {
-        errorMessage = 'Minimo 3 caracteres';
-      }
-      if (userEmail) {
-        errorMessage = 'Email invalido';
-      }
-      // console.log(control.errors);
+    );
+  }
+
+
+  verifySession() {
+    if (!localStorage.getItem('currentUser')) {
+      this.router.navigate(['/login'])
+    } else {
+      this.router.navigate(['/user'])
     }
-    return errorMessage;
   }
+
+  getError(field: string) {
+    if (this.formLogIn.get(field).hasError('required')) {
+      return 'Este campo es obligatorio';
+    }
+    if (this.formLogIn.get(field).hasError('pattern')) {
+      return 'Caracteres ingresados no validos';
+    }
+    if (this.formLogIn.get(field).hasError('minlength')) {
+      return 'Los caracteres del campo no cumplen con el tamaño minimo';
+    }
+    if (this.formLogIn.get(field).hasError('maxlength')) {
+      return 'Los caracteres del campo no cumplen con el tamaño maximo';
+    }
+    if (this.formLogIn.get(field).hasError('min')) {
+      return 'El valor ingresado es demasiado pequeño';
+    }
+    if (this.formLogIn.get(field).hasError('max')) {
+      return 'El valor ingresado es superior al requerido';
+    }
+  }
+
 
 }

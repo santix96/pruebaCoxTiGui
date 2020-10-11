@@ -1,0 +1,30 @@
+.userCard {
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+    margin-top: 5rem;
+  }
+
+  .cardLoginHeader{
+      text-align: left;
+  }
+
+.login-image {
+    height: 300px;
+    width: 300px;
+    margin: auto;
+}
+
+.full-width-input{
+    width: 100%;
+  }
+
+  .submitFormLogin{
+      width: 95%;
+      margin: 1rem;
+  }
+
+  .registerText{
+      text-align: left;
+      margin-top: 1rem;
+  }

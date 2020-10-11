@@ -3,19 +3,25 @@
     <mat-card-title>Bienvenido</mat-card-title>
     <mat-card-subtitle>Indicanos tu informacion de registro</mat-card-subtitle>
     <mat-card-content>
-      <form [formGroup]="formRegisterUser">
+      <form [formGroup]="formRegisterUser" id="registerUserForm" (ngSubmit)="registerNewUser()">
         <h2 class="labelData"> Datos personales</h2>
         <div class="row">
           <div class="col-sm">
             <mat-form-field class="full-width-input">
               <mat-label>Nombre</mat-label>
               <input matInput formControlName="userName" placeholder="tu nombre" type="text">
+              <mat-error *ngIf="formRegisterUser.get('userName').invalid">{{
+                getError("userName")}}
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm">
             <mat-form-field class="full-width-input">
               <mat-label>Numero de identificacion</mat-label>
               <input matInput formControlName="userIdentificationNumber" placeholder="1053850850" type="number">
+              <mat-error *ngIf="formRegisterUser.get('userIdentificationNumber').invalid">{{
+                getError("userIdentificationNumber")}}
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -24,6 +30,9 @@
             <mat-form-field class="full-width-input">
               <mat-label>Numero de celular</mat-label>
               <input matInput formControlName="userCellPhoneNumber" placeholder="302282789">
+              <mat-error *ngIf="formRegisterUser.get('userCellPhoneNumber').invalid">{{
+                getError("userCellPhoneNumber")}}
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm"></div>
@@ -33,12 +42,19 @@
             <mat-form-field class="full-width-input">
               <mat-label>Correo electronico</mat-label>
               <input matInput formControlName="userEmail" placeholder="Ex. pat@example.com" type="email">
+              <mat-error *ngIf="formRegisterUser.get('userEmail').invalid">{{
+                getError("userEmail")}}
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm">
             <mat-form-field class="full-width-input">
               <mat-label>Confirmacion de correo electronico</mat-label>
-              <input matInput formControlName="userEmailConfirmation" placeholder="Ex. pat@example.com" type="email">
+              <input matInput formControlName="userEmailConfirmation" placeholder="Ex. pat@example.com" type="email"
+                (change)="confirmationEmail($event)">
+              <mat-error *ngIf="formRegisterUser.get('userEmailConfirmation').invalid">{{
+                getError("userEmailConfirmation")}}
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -47,28 +63,41 @@
             <mat-form-field class="full-width-input">
               <mat-label>Contraseña</mat-label>
               <input matInput formControlName="userPassword" type="password">
+              <mat-error *ngIf="formRegisterUser.get('userPassword').invalid">{{
+                getError("userPassword")}}
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm">
             <mat-form-field class="full-width-input">
               <mat-label>Confirmacion de Contraseña</mat-label>
-              <input matInput formControlName="userPasswordConfirmation" type="password">
+              <input matInput formControlName="userPasswordConfirmation" type="password"
+                (change)="confirmationPassword($event)">
+              <mat-error *ngIf="formRegisterUser.get('userPasswordConfirmation').invalid">{{
+                getError("userPasswordConfirmation")}}
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
-        <mat-divider ></mat-divider>
+        <mat-divider></mat-divider>
         <h2 class="labelData"> Datos de residencia</h2>
         <div class="row">
           <div class="col-sm">
             <mat-form-field class="full-width-input">
               <mat-label>Departamento</mat-label>
               <input matInput formControlName="userDepartment" placeholder="Departamento" type="text">
+              <mat-error *ngIf="formRegisterUser.get('userDepartment').invalid">{{
+                getError("userDepartment")}}
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm">
             <mat-form-field class="full-width-input">
               <mat-label>Ciudad</mat-label>
               <input matInput formControlName="userCity" placeholder="Ciudad" type="text">
+              <mat-error *ngIf="formRegisterUser.get('userCity').invalid">{{
+                getError("userCity")}}
+              </mat-error>
             </mat-form-field>
           </div>
 
@@ -78,12 +107,18 @@
             <mat-form-field class="full-width-input">
               <mat-label>Barrio</mat-label>
               <input matInput formControlName="userNeighborhood" placeholder="Barrio" type="text">
+              <mat-error *ngIf="formRegisterUser.get('userNeighborhood').invalid">{{
+                getError("userNeighborhood")}}
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm">
             <mat-form-field class="full-width-input">
               <mat-label>Direccion de residencia</mat-label>
               <input matInput formControlName="userAddress" placeholder="Direccion" type="text">
+              <mat-error *ngIf="formRegisterUser.get('userAddress').invalid">{{
+                getError("userAddress")}}
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -94,35 +129,46 @@
             <mat-form-field class="full-width-input">
               <mat-label>Salario</mat-label>
               <input matInput formControlName="userSalary" placeholder="1000000" type="number">
+              <mat-error *ngIf="formRegisterUser.get('userSalary').invalid">{{
+                getError("userSalary")}}
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm">
             <mat-form-field class="full-width-input">
-              <mat-label>Otros  ingresos</mat-label>
+              <mat-label>Otros ingresos</mat-label>
               <input matInput formControlName="userOtherIncome" placeholder="1000000" type="number">
+              <mat-error *ngIf="formRegisterUser.get('userOtherIncome').invalid">{{
+                getError("userOtherIncome")}}
+              </mat-error>
             </mat-form-field>
           </div>
-
         </div>
         <div class="row">
           <div class="col-sm">
             <mat-form-field class="full-width-input">
               <mat-label>Gastos mensuales</mat-label>
               <input matInput formControlName="userMonthlyExpenses" placeholder="1000000" type="number">
+              <mat-error *ngIf="formRegisterUser.get('userMonthlyExpenses').invalid">{{
+                getError("userMonthlyExpenses")}}
+              </mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm">
             <mat-form-field class="full-width-input">
               <mat-label>Gastos financieros</mat-label>
               <input matInput formControlName="userFinancialExpenses" placeholder="1000000" type="number">
+              <mat-error *ngIf="formRegisterUser.get('userFinancialExpenses').invalid">{{
+                getError("userFinancialExpenses")}}
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
       </form>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" class="submitFormLogin">Ingresar</button>
-
+      <button mat-raised-button color="primary" class="submitFormLogin" type="submit"
+        form="registerUserForm">Registrarse</button>
     </mat-card-actions>
   </mat-card>
 </div>
