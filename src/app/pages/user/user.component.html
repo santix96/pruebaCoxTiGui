@@ -1,17 +1,39 @@
 <app-navbar></app-navbar>
 <div class="container">
-    <mat-card class="userCard">
-      <mat-card-header class="cardLoginHeader">
-        <mat-card-title>Bienvenido</mat-card-title>
-        <mat-card-subtitle>Indicanos tu informacion de ingreso</mat-card-subtitle>
-      </mat-card-header>
-      
-      <mat-card-content>
-       
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="primary" class="submitFormLogin">Ingresar</button>
-        
-      </mat-card-actions>
-    </mat-card>
-  </div>
+  <mat-card class="userCard">
+      <mat-card-title>Datos de usuarios</mat-card-title>
+      <mat-card-subtitle>Datos registrados</mat-card-subtitle>
+    <mat-card-content>
+      <table mat-table [dataSource]="users" class="mat-elevation-z8">
+        <!-- Position Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> Id </th>
+          <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+        </ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="user_name">
+          <th mat-header-cell *matHeaderCellDef> Nombre completo </th>
+          <td mat-cell *matCellDef="let element"> {{element.user_name}} </td>
+        </ng-container>
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef> Correo electronico </th>
+          <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+        </ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="identification_number">
+          <th mat-header-cell *matHeaderCellDef> Numero de identificacion </th>
+          <td mat-cell *matCellDef="let element"> {{element.identification_number}} </td>
+        </ng-container>
+        <!-- Position Column -->
+        <ng-container matColumnDef="cellphone_number">
+          <th mat-header-cell *matHeaderCellDef> Numero celular </th>
+          <td mat-cell *matCellDef="let element"> {{element.cellphone_number}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="usersColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: usersColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div>

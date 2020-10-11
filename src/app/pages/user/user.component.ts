@@ -7,13 +7,22 @@ import { UserService } from '../../services/userService/user.service';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  tournamentColumns: string[] = ['id', 'tournament_name', 'init_date', 'quantity_team', 'registration_payment', 'tournament_prize'];
+  usersColumns: string[] = ['id', 'user_name', 'identification_number', 'cellphone_number', 'email'];
+  users: any = [];
   constructor(
     private userService: UserService
   ) { }
 
   ngOnInit(): void {
-    this.userService.
+    this.userService.getAllUsers().subscribe(
+      (response) => {
+        console.log(response);
+        this.users = response;
+      },
+      (error) => {
+        console.error(error);
+      }
+    )
   }
 
 }

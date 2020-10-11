@@ -3,10 +3,11 @@
     max-width: 800px;
     margin: auto;
     margin-top: 5rem;
+    background-color: #fafafa;
   }
 
   .cardLoginHeader{
-      text-align: left;
+      text-align: center;
   }
 
 .login-image {
@@ -27,4 +28,12 @@
   .registerText{
       text-align: left;
       margin-top: 1rem;
+  }
+  table {
+    width: 100%;
+    text-align: center;
+  }
+
+.mat-header-cell{
+    text-align: center;
   }

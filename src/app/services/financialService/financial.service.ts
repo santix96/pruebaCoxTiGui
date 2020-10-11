@@ -23,4 +23,7 @@ export class FinancialService {
     return this.Http.post(this.configService.serverIp.concat('/save_financial'), financialData, {headers});
   
   }
+  getAllFinancials(){
+    return this.Http.get(this.configService.serverIp.concat('/all_financials'));
+  }
 }

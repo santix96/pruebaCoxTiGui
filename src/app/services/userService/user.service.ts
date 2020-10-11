@@ -22,4 +22,7 @@ export class UserService {
     return this.Http.post(this.configService.serverIp.concat('/save_user'), userData, { headers });
   }
   
+  getAllUsers(){
+    return this.Http.get(this.configService.serverIp.concat('/all_users'));
+  }
 }
