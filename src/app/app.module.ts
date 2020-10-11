@@ -8,6 +8,7 @@ import { RegisterUserComponent } from './pages/register-user/register-user.compo
 import { UserComponent } from './pages/user/user.component';
 import { ResidentialComponent } from './pages/residential/residential.component';
 import { FinancialComponent } from './pages/financial/financial.component';
+
 import { NotFoundComponent } from './components/not-found/not-found.component';
 
 import { FormsModule } from '@angular/forms';
@@ -18,7 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent,
+    NotFoundComponent
   ],
   imports: [
     FormsModule,

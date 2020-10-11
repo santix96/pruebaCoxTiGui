@@ -6,6 +6,8 @@ import { UserComponent} from './user.component';
 import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
+import { NavbarModule } from 'src/app/components/navbar/navbar.module';
+import { NavbarComponent } from 'src/app/components/navbar/navbar.component';
 
 @NgModule({
   declarations: [UserComponent],
@@ -14,10 +16,14 @@ import {MatTableModule} from '@angular/material/table';
     UserRoutingModule,
     MatCardModule,
     MatButtonModule,
-    MatTableModule
+    MatTableModule,
+    NavbarModule
   ],
   exports: [
     UserComponent
+  ],
+  entryComponents: [
+    NavbarComponent
   ]
 })
 export class UserModule { }
